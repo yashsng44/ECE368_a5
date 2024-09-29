@@ -42,16 +42,14 @@
 
 int compareCoordinates(int x, int y, int radius, int * coord_arr, int num_coords) {
   int num_match = 0;
-  float dist;
   float rad_sq = radius * radius;
 
   for(int i = 0; i <= num_coords - 2 ; i = i + 2) {
-    float var1 = (coord_arr[i] - x)*(coord_arr[i] - x);
-    float var2 = (coord_arr[i+1] - y)*(coord_arr[i+1] - y);
-    dist = var1 + var2;
+    float dist = ((coord_arr[i] - x)*(coord_arr[i] - x)) + ((coord_arr[i+1] - y)*(coord_arr[i+1] - y)); 
     if (dist <= rad_sq) {
       num_match++;
     }
   }
+
   return num_match;
 }
