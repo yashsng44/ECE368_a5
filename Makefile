@@ -16,5 +16,5 @@ test_file: a5
 	$(VAL) ./a5 test.txt 
 
 clean: # remove all machine generated files
-	rm -f a5 *.o output? *~ 
+	rm -f a5 *.o output? *~ memcheck.txt
 

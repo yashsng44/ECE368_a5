@@ -42,16 +42,16 @@ bool readCoordinates(char * filename, int ** coord_arr, int * num_coords) {
 
 int compareCoordinates(int x, int y, int radius, int * coord_arr, int num_coords) {
   int num_match = 0;
-  int dist;
+  float dist;
 
-  for(int i = 0; i <= num_coords- 1 ; i = i + 2) {
-    int var1 = pow((coord_arr[i] - x), 2);
+  for(int i = 0; i <= num_coords- 2 ; i = i + 2) {
+    float var1 = (coord_arr[i] - x)*(coord_arr[i] - x);
     // printf("operation x %d - %d ^ 2 = %d \n", coord_arr[i], x, var1);
-    int var2 = pow((coord_arr[i+1] - y), 2);
+    float var2 = (coord_arr[i+1] - y)*(coord_arr[i+1] - y);
     // printf("operation y %d - %d ^ 2 = %d \n", coord_arr[i+1], y, var2);
     dist = sqrt(var1 + var2);
     if (dist <= radius) {
-      // printf(" dist %d <= radius %d\n", dist, radius);
+      printf(" dist %f <= radius %d\n", dist, radius);
       num_match++;
     }
   }
