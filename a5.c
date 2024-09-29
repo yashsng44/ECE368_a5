@@ -5,7 +5,7 @@
 #include <math.h>
 #include "a5.h"
 
- bool readCoordinates(char * filename, int ** coord_arr, int * num_coords) {
+ int readCoordinates(char * filename, int x_2, int y_2, int radius) {
 
   FILE *fol;
 
@@ -16,40 +16,19 @@
     return false;
   }
 
-  int n = 0;
   char buffer[10];
-
-  while(fgets(buffer, sizeof(buffer), fol)) {
-    n++;
-  }
-
-  *coord_arr = malloc(sizeof(int)*2*n);
+  float rad_sq = radius*radius;
   fseek(fol, 0, SEEK_SET);
-  int i = 0;
-  
+  int num_match = 0;
   while(fgets(buffer, sizeof(buffer), fol)) {
     int x, y;
     sscanf(buffer, "%d %d", &x, &y);
-    (*coord_arr)[i] = x;
-    (*coord_arr)[i+1] = y;
-     i += 2;
-  }
-
-  *num_coords = n*2;
-  fclose(fol);
-  return true;
-}
-
-int compareCoordinates(int x, int y, int radius, int * coord_arr, int num_coords) {
-  int num_match = 0;
-  float rad_sq = radius * radius;
-
-  for(int i = 0; i <= num_coords - 2 ; i = i + 2) {
-    float dist = ((coord_arr[i] - x)*(coord_arr[i] - x)) + ((coord_arr[i+1] - y)*(coord_arr[i+1] - y)); 
+    float dist = ((x - x_2)*(x - x_2)) + ((y - y_2)*(y - y_2)); 
     if (dist <= rad_sq) {
       num_match++;
     }
   }
 
+  fclose(fol);
   return num_match;
 }

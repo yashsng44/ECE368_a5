@@ -8,7 +8,6 @@
 #include "a5.h"
 
 
-bool readCoordinates(char * file_name, int ** coord_arr, int * num_coords);
-int compareCoordinates(int coord_x, int coord_y, int radius, int * coord_arr, int num_coords);
+int readCoordinates(char * file_name, int coord_x, int coord_y, int radius);
 
 #endif
