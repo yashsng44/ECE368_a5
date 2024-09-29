@@ -51,7 +51,7 @@ int compareCoordinates(int x, int y, int radius, int * coord_arr, int num_coords
     // printf("operation y %d - %d ^ 2 = %d \n", coord_arr[i+1], y, var2);
     dist = sqrt(var1 + var2);
     if (dist <= radius) {
-      printf(" dist %f <= radius %d\n", dist, radius);
+      //printf(" dist %f <= radius %d\n", dist, radius);
       num_match++;
     }
   }
