@@ -23,13 +23,8 @@ if (rtv == false){
 
 int coord_x, coord_y, radius = 0;
 
-while(1) {
-scanf("%d %d %d", &coord_x, &coord_y, &radius);
+while(scanf("%d %d %d", &coord_x, &coord_y, &radius) == 3) {
 printf("%d\n", compareCoordinates(coord_x, coord_y, radius, coord_arr, num_coords));
-if (radius == 4) {
-    free(coord_arr);
-    return EXIT_SUCCESS;
-}
 }
 
 free(coord_arr);

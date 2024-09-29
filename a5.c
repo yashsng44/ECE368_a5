@@ -5,7 +5,7 @@
 #include <math.h>
 #include "a5.h"
 
-bool readCoordinates(char * filename, int ** coord_arr, int * num_coords) {
+ bool readCoordinates(char * filename, int ** coord_arr, int * num_coords) {
 
   FILE *fol;
 
@@ -43,15 +43,13 @@ bool readCoordinates(char * filename, int ** coord_arr, int * num_coords) {
 int compareCoordinates(int x, int y, int radius, int * coord_arr, int num_coords) {
   int num_match = 0;
   float dist;
+  float rad_sq = radius * radius;
 
-  for(int i = 0; i <= num_coords- 2 ; i = i + 2) {
+  for(int i = 0; i <= num_coords - 2 ; i = i + 2) {
     float var1 = (coord_arr[i] - x)*(coord_arr[i] - x);
-    // printf("operation x %d - %d ^ 2 = %d \n", coord_arr[i], x, var1);
     float var2 = (coord_arr[i+1] - y)*(coord_arr[i+1] - y);
-    // printf("operation y %d - %d ^ 2 = %d \n", coord_arr[i+1], y, var2);
-    dist = sqrt(var1 + var2);
-    if (dist <= radius) {
-      //printf(" dist %f <= radius %d\n", dist, radius);
+    dist = var1 + var2;
+    if (dist <= rad_sq) {
       num_match++;
     }
   }
