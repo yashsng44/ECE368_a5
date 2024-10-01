@@ -5,9 +5,7 @@
 #include <string.h> 
 #include <stdbool.h>
 #include <math.h>
-#include "a5.h"
 
-
-int readCoordinates(char * file_name, int coord_x, int coord_y, int radius);
+int readCoordinates(FILE * file_name, int coord_x, int coord_y, float radius);
 
 #endif
