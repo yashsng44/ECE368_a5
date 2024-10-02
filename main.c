@@ -15,9 +15,9 @@ if (argc != 2)
 int coord_x, coord_y, radius, num_coords = 0;
 // int * coord_arr_x, coord_arr_y;
 struct Node * root = readCoordinates(argv[1]);
-printTree(root);
+//printTree(root);
 while(scanf("\n%d %d %d", &coord_x, &coord_y, &radius) == 3) {
-num_coords = find_coords(root, coord_x, coord_y, radius);
+num_coords = find_coords(root, coord_x, coord_y, radius); // what about for the case where radius = 0???
 printf("%d\n", num_coords);
 }
 
