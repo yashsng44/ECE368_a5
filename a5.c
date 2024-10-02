@@ -3,6 +3,7 @@
 #include <string.h> 
 #include <stdbool.h>
 #include <math.h>
+#include <time.h>
 #include "a5.h"
 
 struct Node newNode(int x, int y) {
@@ -180,26 +181,29 @@ struct Node* readCoordinates(char * filename) {
 }
 
 int find_coords(struct Node * bst_root, int coord_x, int coord_y, int radius) {
-  if (bst_root == NULL) {
-    return 0;
-  }
+  // if (bst_root == NULL) {
+  //   return 0;
+  // }
   printNode(bst_root);
   int x_low = coord_x - radius;
   int x_high = coord_x + radius;
   int x_diff_sq = (bst_root->x - coord_x)*(bst_root->x - coord_x);
   int r_squared = radius*radius;
 
-  if ((bst_root->x <= x_high && bst_root->x >= x_low) || bst_root->x == 0x0) {
+  if ((bst_root->x <= x_high && bst_root->x >= x_low)) {
     int y_range = sqrt(r_squared - x_diff_sq);
     int y_high = y_range + coord_y;
     int y_low = coord_y - y_range;
     if (bst_root->y <= y_high && bst_root->y >= y_low) {
     printf("%d %d is within the x range %d:%d and y range %d:%d\n", bst_root->x, bst_root->y, x_low, x_high, y_low, y_high);
     return (1 + find_coords(bst_root->left, coord_x, coord_y, radius) + find_coords(bst_root->right, coord_x, coord_y, radius));
-    } } else if ((bst_root->x < x_low) || bst_root->x == 0x0) {
+    } } else if ((bst_root->x < x_low)) {
         return find_coords(bst_root->right, coord_x, coord_y, radius);
-    } else if ((bst_root->x > x_high) || bst_root->x == 0x0) {
+    } else if ((bst_root->x > x_high)) {
         return find_coords(bst_root->left, coord_x, coord_y, radius);
+    } else if (bst_root == NULL){
+      printf("wtaf\n");
+      return 0;
     }
 
 return 0;
