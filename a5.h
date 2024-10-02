@@ -15,4 +15,6 @@ struct Node *right;
 
 struct Node * readCoordinates(char * file);
 int find_coords(struct Node * root, int x_lower, int x_higher, int radius);
+void printTree(struct Node * node);
+
 #endif
