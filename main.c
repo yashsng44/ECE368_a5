@@ -12,22 +12,15 @@ if (argc != 2)
       return EXIT_FAILURE;
 }
 
-int coord_x, coord_y, radius = 0;
-FILE *fol;
-fol= fopen(argv[1], "r");
-
-if (fol == NULL)  
-{
-    return false;
-}
+int coord_x, coord_y, radius, num_coords = 0;
+// int * coord_arr_x, coord_arr_y;
+struct Node * root = readCoordinates(argv[1]);
 
 while(scanf("%d %d %d", &coord_x, &coord_y, &radius) == 3) {
-  fseek(fol, 0, SEEK_SET);
-  float rad_sq = radius * radius;
-  printf("%d\n", readCoordinates(fol,  coord_x, coord_y, rad_sq));
+num_coords = find_coords(root, coord_x, coord_y, radius);
+printf("%d\n", num_coords);
 }
 
-fclose(fol);
 return EXIT_SUCCESS;
 }
     

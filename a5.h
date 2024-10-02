@@ -6,6 +6,13 @@
 #include <stdbool.h>
 #include <math.h>
 
-int readCoordinates(FILE * file_name, int coord_x, int coord_y, float radius);
+typedef struct Node
+{ int x;
+  int y;
+struct Node *left;
+struct Node *right;
+} Node;
 
+struct Node * readCoordinates(char * file);
+int find_coords(struct Node * root, int x_lower, int x_higher, int radius);
 #endif
