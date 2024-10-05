@@ -7,7 +7,7 @@ SRCS = main.c a5.c
 OBJS = $(SRCS:%.c=%.o)
 
 a5: $(OBJS)
-	$(GCC) $(OBJS) -o a5 -lm
+	$(GCC) $(OBJS) -o a5 
 
 .c.o:
 	$(GCC) -c $*.c
