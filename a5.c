@@ -6,16 +6,6 @@
 #include <time.h>
 #include "a5.h"
 
-struct Node newNode(int x, int y)
-{
-    struct Node node;
-    node.x = x;
-    node.y = y;
-    node.left = NULL;
-    node.right = NULL;
-    return node;
-}
-
 // // Function to find the height of the BST
 // int findHeight(struct Node *node)
 // {
@@ -121,54 +111,23 @@ struct Node newNode(int x, int y)
 //     }
 // }
 
-// int compareNodes(const void *a, const void *b)
+// void free_tree(struct Node *root)
 // {
-//     struct Node *node_a = (struct Node *)a;
-//     struct Node *node_b = (struct Node *)b;
-//     return (node_a->x - node_b->x);
-// }
-
-// // void printNodes(struct Node * nodes, int n)
-// // {
-// //     for (int i = 0; i <= n - 1; i++)
-// //     {
-// //         printf("| %d |->", nodes[i].x);
-// //     }
-// //     printf("NULL\n");
-// // }
-
-// void printNode(struct Node *node)
-// {
-//     if (node == NULL)
-//     {
-//         printf("Node is NULL\n");
+//     if (root == NULL) {
 //         return;
+//     } else {
+//     free_tree(root->left);
+//     free_tree(root->right);
+//     free(root);
 //     }
-
-//     // Print the current node's data
-//     printf("Node (x: %d, y: %d)", node->x, node->y);
-
-//     // Print whether it has left and right children
-//     if (node->left != NULL)
-//     {
-//         printf(", Left child exists");
-//     }
-//     else
-//     {
-//         printf(", Left child: NULL");
-//     }
-
-//     if (node->right != NULL)
-//     {
-//         printf(", Right child exists");
-//     }
-//     else
-//     {
-//         printf(", Right child: NULL");
-//     }
-
-//     printf("\n");
 // }
+
+int compareNodes(const void *a, const void *b)
+{
+    struct Node *node_a = (struct Node *)a;
+    struct Node *node_b = (struct Node *)b;
+    return (node_a->x - node_b->x);
+}
 
 struct Node *build_bst(struct Node *nodes, int start, int end)
 {
@@ -177,13 +136,13 @@ struct Node *build_bst(struct Node *nodes, int start, int end)
         return NULL;
     }
     int mid = (start + end) / 2;
-    struct Node *root = &nodes[mid];
+    struct Node * root = &nodes[mid];
     root->left = build_bst(nodes, start, mid - 1);
     root->right = build_bst(nodes, mid + 1, end);
     return root;
 }
 
-struct Node *readCoordinates(char *filename)
+struct Node * readCoordinates(char *filename, int * node_count)
 {
 
     FILE *fol;
@@ -197,31 +156,31 @@ struct Node *readCoordinates(char *filename)
     int n = 0;
     char buffer[20];
 
+    // Counting the number of lines
     while (fgets(buffer, sizeof(buffer), fol))
     {
         n++;
     }
 
-    struct Node *nodes = malloc(sizeof(struct Node) * n);
+    struct Node * nodes = malloc(sizeof(struct Node) * n);
     fseek(fol, 0, SEEK_SET);
     int i = 0;
 
+    // Reading the coordinates and creating nodes
     while (fgets(buffer, sizeof(buffer), fol))
     {
-        int x, y;
-        sscanf(buffer, "%d %d", &x, &y);
-        nodes[i] = newNode(x, y);
-        //printNode(&nodes[i]);
+        sscanf(buffer, "%d %d", &(nodes[i].x), &(nodes[i].y));
+        (nodes[i]).left = NULL;
+        (nodes[i]).right = NULL;
         i++;
     }
     fclose(fol);
     qsort(nodes, n, sizeof(struct Node), compareNodes);
-    // printNodes(nodes, n);
-    struct Node *root = build_bst(nodes, 0, n - 1);
-    return root;
+    *node_count = n;
+    return nodes;
 }
 
-int find_coords(struct Node *bst_root, int coord_x, int coord_y, int radius)
+int find_coords(struct Node * bst_root, int coord_x, int coord_y, int radius)
 {
     if (bst_root == NULL)
     {
@@ -260,3 +219,4 @@ int find_coords(struct Node *bst_root, int coord_x, int coord_y, int radius)
 
     return 0;
 }
+

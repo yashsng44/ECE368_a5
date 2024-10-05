@@ -13,8 +13,7 @@ struct Node *left;
 struct Node *right;
 } Node;
 
-struct Node * readCoordinates(char * file);
+struct Node * readCoordinates(char * file, int * node_count);
 int find_coords(struct Node * root, int x_lower, int x_higher, int radius);
-void printTree(struct Node * node);
-
+struct Node * build_bst(struct Node * root, int start, int end);
 #endif
